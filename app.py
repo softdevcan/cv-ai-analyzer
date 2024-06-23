@@ -5,7 +5,7 @@ import google.generativeai as genai
 from PyPDF2 import PdfReader
 
 # Google API anahtarınızı burada ayarlayın
-genai.configure(api_key="AIzaSyA6s6XRuOhU9CLP6OoV_Mc-nDkZiEI3lj8")
+genai.configure(api_key="xxxxxxxxxxxxxxxxxxxxxxxx")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 def get_gemini_output(pdf_text, job_description, prompt):
