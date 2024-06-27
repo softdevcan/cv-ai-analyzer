@@ -3,9 +3,16 @@ import streamlit as st
 import os
 import google.generativeai as genai
 from PyPDF2 import PdfReader
+import environ
 
-# Google API anahtarınızı burada ayarlayın
-genai.configure(api_key="xxxxxxxxxxxxxxxxxxxxxxxx")
+env = environ.Env(DEBUG=(bool, False))
+environ.Env.read_env()
+
+# Set the Google API key as an environment variable
+os.environ['GOOGLE_API_KEY'] = env('GOOGLE_API_KEY')
+
+# Configure the Google Generative AI library
+genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 def get_gemini_output(pdf_text, job_description, prompt):
