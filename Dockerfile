@@ -1,18 +1,21 @@
 # app/Dockerfile
 FROM python:3.10-slim
+
 RUN apt-get update
-# Çalışma dizinini ayarla
+
+# Çalışma dizinimizi oluşturuyoruz ve belirliyoruz
 WORKDIR /app
 
-RUN pip install --upgrade pip
+# Gereksinim dosyamızı container içine kopyalıyoruz
+COPY requirements.txt .
 
-# Gerekli dosyaları kopyala
-COPY requirements.txt requirements.txt
-COPY app.py app.py
+# Gereksinim dosyasındaki paketleri yüklüyoruz
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Gerekli paketleri yükle
-RUN pip install -r requirements.txt
+# Uygulama dosyalarımızı container içine kopyalıyoruz
+COPY . .
 
-# Uygulamayı başlat
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
+# Container içinde Streamlit uygulamamızı başlatıyoruz
+CMD ["streamlit", "run", "app.py"]
+
 

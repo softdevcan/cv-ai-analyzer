@@ -1,12 +1,13 @@
-version: '3'
+version: '3.8'
+
 services:
-  streamlit-app:
+  streamlit_app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8501:8501"
     volumes:
-      - ./app:/app
+      - .:/app
     environment:
-      - PORT=8501
+      - PYTHONUNBUFFERED=1
